@@ -1,0 +1,9 @@
+- hosts: tag_Name_ansible_hosts
+  gather_facts: no 
+  remote_user: ubuntu 
+  tasks:
+    - name: Test connections
+      ping:
+      remote_user: ubuntu
+
+

@@ -1,0 +1,12 @@
+---
+- name: group module demo 
+  hosts: dev
+  become: true
+  vars:
+    mygroup: "devops"
+  tasks:
+    - name: create finance group
+      ansible.builtin.group:
+        name: "{{mygroup}}"
+        state: present
+  

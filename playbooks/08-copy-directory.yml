@@ -1,0 +1,9 @@
+- hosts:  dev
+  become: true
+  tasks:
+    - name:  copyfile and directories to all host machinnes
+      copy:  src=/home/liontechacademy/Liontech-configurations-management/03-ansible-playbooks/sample.txt
+             dest=/tmp/
+             owner=liontechacademy
+             group=liontechacademy
+             mode=0666

@@ -1,0 +1,29 @@
+- hosts: all
+  become: true
+  gather_facts: true 
+  ignore_errors: true
+  tasks:
+   - name: Install apache webserver on remote hosts
+     yum: name=httpd state=latest
+     tags:
+     - install 
+   - name: start apache webserver 
+     service: name=httpd state=started
+     tags:
+     - start 
+   - name: copy files to index.html 
+     copy:
+      src: /home/liontechacademy/Liontech-configurations-management/03-ansible-playbooks/index.html
+      dest: /var/www/html/index.html
+   - name: debug the playbook and runs
+     debug:
+       msg: "from lion tech academy, you are welcome. practice makes perfect"
+   - name: restart the apache webserver
+     service: name=httpd state=restarted 
+   - name: create a file 
+     shell: echo "welcome to Lion Tech Acadmy"  > weclome.txt
+   
+      
+      
+
+  

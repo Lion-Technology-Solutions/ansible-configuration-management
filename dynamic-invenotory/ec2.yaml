@@ -1,0 +1,7 @@
+---
+plugin: aws_ec2
+aws_access_key: AKIAY76DL5PTYLDGXR4P
+aws_secret_key: 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
+keyed_groups:
+  - key: tags
+    prefix: tag

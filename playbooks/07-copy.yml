@@ -1,0 +1,9 @@
+- hosts:  all 
+  become: true
+  tasks:
+    - name:  copyfile and directories to all host machinnes
+      copy:  src=/etc/ansible/host
+             dest=/tmp/
+             owner=root
+             group=root
+             mode=0666

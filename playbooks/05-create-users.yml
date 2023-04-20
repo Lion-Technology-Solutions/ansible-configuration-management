@@ -1,0 +1,19 @@
+- hosts: all   
+  become: yes
+  tasks: 
+    - name: Create System User 
+      user:
+        name: vicky
+        create_home: true
+        shell: /bin/bash
+        comment: "Vicky's Tech Account"
+        expires: -1
+        password: "{{'Devops2022' | password_hash('sha512','A512' )}}"
+    - name: Create Another System User 
+      user:
+        name: melani
+        create_home: true
+        shell: /bin/bash
+        comment: "Engineer Melani  Tech Account"
+        expires: -1
+        password: "{{'Devops2022' | password_hash('sha512','A512' )}}"

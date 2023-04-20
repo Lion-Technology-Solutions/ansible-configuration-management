@@ -1,0 +1,9 @@
+- hosts:  all
+  become: yes 
+  ignore_errors: true
+  tasks: 
+    - name: Install Packages 
+      apt:
+       name: ['git', 'wget', 'zip', 'unzip']
+      
+      
