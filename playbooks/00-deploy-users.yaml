@@ -1,0 +1,38 @@
+# liontechadmin <group/host Name> -m ping -u <userName> --private-key=~/devops.pem
+# liontechadmin-playbook -b liontechadmin-createuser.yml -u <userName> --private-key=~/devops.pem
+- hosts: tag_Name_prod
+  become: true
+  tasks:
+  - name: Create liontechadmin User
+    user:
+      name: liontechadmin
+      create_home: true
+      shell: /bin/bash
+      comment: "liontechadmin Management Account"
+      expires: -1
+      password: "{{ 'DevOps@2020' | password_hash('sha512','A512') }}"
+  - name: Deploy Local User SSH Key
+    authorized_key:
+      user: liontechadmin
+      state: present
+      manage_dir: true
+      key: "{{ lookup('file', '/home/liontechnologyies/.ssh/id_rsa.pub') }}"
+  - name: Setup Sudo Access for liontechadmin User
+    copy:
+      dest: /etc/sudoers.d/liontechadmin
+      content: 'liontechadmin ALL=(ALL) NOPASSWD: ALL' 
+      validate: /usr/sbin/visudo -cf %s
+  -  name: Disable Password Authentication
+     lineinfile:
+        dest=/etc/ssh/sshd_config
+        regexp='^PasswordAuthentication'
+        line="PasswordAuthentication no"
+        state=present
+        backup=yes
+     notify:
+       - restart ssh
+  handlers:
+  - name: restart ssh
+    service:
+      name=sshd
+      state=restarted

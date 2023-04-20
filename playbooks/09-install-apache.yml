@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: tag_Name_webapps
   become: true
   gather_facts: true 
   ignore_errors: true
@@ -13,7 +13,7 @@
      - start 
    - name: copy files to index.html 
      copy:
-      src: /home/liontechacademy/Liontech-configurations-management/03-ansible-playbooks/index.html
+      src: /home/liontechnologyies/ansible-configuration-management/playbooks/index.html
       dest: /var/www/html/index.html
    - name: debug the playbook and runs
      debug:
