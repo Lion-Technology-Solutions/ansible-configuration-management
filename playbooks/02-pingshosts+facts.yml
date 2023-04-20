@@ -1,7 +1,7 @@
--  hosts: dev
+-  hosts: tag_Name_prod 
    gather_facts: yes
-   remote_user: paul
+   remote_user: melani
    tasks: 
-     - name: Test remote connection
+     - name: Test remote connection on prod server
        ping:
-       remote_user:  paul
+       remote_user:  melani
