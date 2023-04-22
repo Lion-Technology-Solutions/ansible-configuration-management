@@ -1,0 +1,13 @@
+#This playbooks deploys git, wget, zip, awscli into our remote hosts
+---    #this starts the playbook. 
+- hosts: tag_Name_prod
+  become: false                          #this keyword helps you to assume admin previlage , this can take true or false
+  ignore_errors: true   #this ignores errors and allow the plays to continue
+  tasks: 
+    - name: Install packages on stage environment   #the package module [ apt or yum]
+      apt:  
+       name: ['git', 'wget', 'zip']
+      
+
+#How to execute a playbooks in ansible
+# ansible-playbook -f [playbook-name]

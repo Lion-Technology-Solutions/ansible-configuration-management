@@ -1,0 +1,10 @@
+- hosts: tag_Name_stage
+  remote_user: ubuntu
+  gather_facts: yes
+  tasks:
+   - name:  Testing Remote conections with stage  servers
+     ping: 
+     remote_user: ubuntu   
+
+#How to execute this playbook. 
+# ansible-playbook  ping-dev.yaml 

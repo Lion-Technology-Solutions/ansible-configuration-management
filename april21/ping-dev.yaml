@@ -1,0 +1,10 @@
+- hosts: tag_Name_dev
+  remote_user: ec2-user
+  gather_facts: yes
+  tasks:
+   - name:  Testing Remote conections with dev servers
+     ping: 
+     remote_user: ec2-user   
+
+#How to execute this playbook. 
+# ansible-playbook  ping-dev.yaml 
