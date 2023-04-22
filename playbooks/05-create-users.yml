@@ -1,19 +1,27 @@
-- hosts: tag_Name_prod  
-  become: yes
+- hosts: tag_Name_dev
+  become: true 
   tasks: 
-    - name: Create System User 
+    - name: Create a new DevOps Engineer User for our production environment 
       user:
         name: vicky
         create_home: true
         shell: /bin/bash
-        comment: "Vicky's Tech Account"
+        comment: "Vicky's is our Latest DevOps Engineer"
         expires: -1
         password: "{{'Devops2022' | password_hash('sha512','A512' )}}"
-    - name: Create Another System User 
+    - name: Create a User for our Infrastructure Team 
       user:
         name: melani
         create_home: true
         shell: /bin/bash
         comment: "Engineer Melani  Tech Account"
         expires: -1
-        password: "{{'Devops2022' | password_hash('sha512','A512' )}}"
+        password: "{{'Devops2022' | password_hash('sha512','A512' )}}" 
+    - name: Create a cloud Platform engineer user 
+      user:
+        name: george
+        create_home: true
+        shell: /bin/bash
+        comment: "Engineer George  Tech Account"
+        expires: -1
+        password: "{{'Devops2023' | password_hash('sha512','A512' )}}"

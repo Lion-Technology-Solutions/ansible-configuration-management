@@ -1,27 +1,27 @@
-# elvis <group/host Name> -m ping -u <userName> --private-key=~/devops.pem
-# elvis-playbook -b elvis-createuser.yml -u <userName> --private-key=~/devops.pem
-# ssh elvis@ec2-3-96-162-111.ca-central-1.compute.amazonaws.com   [test connections]
+# benji <group/host Name> -m ping -u <userName> --private-key=~/devops.pem
+# benji-playbook -b benji-createuser.yml -u <userName> --private-key=~/devops.pem
+# ssh benji@ec2-3-96-162-111.ca-central-1.compute.amazonaws.com   [test connections]
 - hosts: tag_Name_prod
   become: true
   tasks:
-  - name: Create elvis User
+  - name: Create benji User
     user:
-      name: elvis
+      name: benji
       create_home: true
       shell: /bin/bash
-      comment: "elvis Management Account"
+      comment: "benji Management Account"
       expires: -1
       password: "{{ 'DevOps@2020' | password_hash('sha512','A512') }}"
   - name: Deploy Local User SSH Key
     authorized_key:
-      user: elvis
+      user: benji
       state: present
       manage_dir: true
-      key: "{{ lookup('file', '/home/liontechnologyies/.ssh/id_rsa.pub') }}"
-  - name: Setup Sudo Access for elvis User
+      key: "{{ lookup('file', '/home/liontechnologyies/.ssh/id_rsa.pub') }}"  #ssh-keygen  [ this creates two keys , one public and one private]
+  - name: Setup Sudo Access for benji User
     copy:
-      dest: /etc/sudoers.d/elvis
-      content: 'elvis ALL=(ALL) NOPASSWD: ALL' 
+      dest: /etc/sudoers.d/benji
+      content: 'benji ALL=(ALL) NOPASSWD: ALL' 
       validate: /usr/sbin/visudo -cf %s
   -  name: Disable Password Authentication
      lineinfile:

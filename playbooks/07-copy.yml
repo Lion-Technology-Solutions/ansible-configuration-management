@@ -1,9 +1,12 @@
-- hosts:  all 
+- hosts:  tag_Name_prod
   become: true
+  ignore_errors: true
   tasks:
-    - name:  copyfile and directories to all host machinnes
-      copy:  src=/etc/ansible/host
-             dest=/tmp/
-             owner=root
-             group=root
+    - name:  copyfile and directories to all host machinnes in the production environment
+      copy:  src=/home/liontechnologyies/ansible-configuration-management/playbooks/april21.html
+             dest=/home/ubuntu/april21.html
+             owner=ubuntu
+             group=ubuntu
              mode=0666
+
+#this playbooks copies specified files from ansible controller to the remote hosts in the production environment
