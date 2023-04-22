@@ -1,0 +1,20 @@
+  #this playbook would make use of ansible handlers
+  - hosts: tag_Name_dev     #this inventory has 10 remote host of os amazon linux 2    
+    become: yes 
+    ignore_errors: yes 
+    gather_facts: yes 
+    tasks:
+     - name: Install and deploy apache on all dev servers.   
+       package:    #package is used to install packages on systems or package management [apt [sudo apt update] apt is the package manager fdor ubuntu] , [yum is the package manager for linux instances such [redhat, amazon linux 2]]
+        name: httpd
+        state: latest 
+     - name: start apache 
+       service:
+        name: httpd
+        state: started     
+     - name: copy april22.html  
+       copy:
+        src: /home/liontechnologyies/april22/april22.html
+        dest: /var/www/april22.html
+      
+              

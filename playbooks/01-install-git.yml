@@ -3,4 +3,18 @@
   tasks:
     - name: Install Packages
       apt:
-        name: ['git', 'wget', 'awscli', 'maven']
+        name: ['git', 'wget', 'awscli', 'maven']    #list
+
+- hosts: prods    
+  become: yes  #become grants ansible controller sudo/admins rights
+  gather_facts:  yes
+  ignore_errors: yes #true or false. 
+  tasks: 
+    
+#Do you have experience with writing ansible playbooks from scratch. 
+# hosts : localhosts or remote hosts   [remote hosts refers to our remote inventory]
+# become :  this grants the ansbile user admins  become can be true or false
+#tasks : 
+  #  -name : install jenkins 
+   # -name: install terra
+#localhosts
