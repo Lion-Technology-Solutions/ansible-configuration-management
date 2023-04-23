@@ -1,27 +1,28 @@
-# liontechadmin <group/host Name> -m ping -u <userName> --private-key=~/devops.pem
-# liontechadmin-playbook -b liontechadmin-createuser.yml -u <userName> --private-key=~/devops.pem
-# ssh liontechadmin@ec2-3-96-162-111.ca-central-1.compute.amazonaws.com   [test connections]
-- hosts: tag_Name_prod
+# daniel <group/host Name> -m ping -u <userName> --private-key=~/devops.pem
+# daniel-playbook -b daniel-createuser.yml -u <userName> --private-key=~/devops.pem
+# ssh daniel@ec2-3-96-162-111.ca-central-1.compute.amazonaws.com   [test connections]
+- hosts: tag_Name_dev    #deploying an daniel user to the dev hosts
   become: true
+  remote_user: admin
   tasks:
-  - name: Create liontechadmin User
+  - name: Create daniel User
     user:
-      name: liontechadmin
+      name: daniel
       create_home: true
       shell: /bin/bash
-      comment: "liontechadmin Management Account"
+      comment: "daniel Management Account"
       expires: -1
       password: "{{ 'DevOps@2020' | password_hash('sha512','A512') }}"
   - name: Deploy Local User SSH Key
     authorized_key:
-      user: liontechadmin
+      user: daniel
       state: present
       manage_dir: true
       key: "{{ lookup('file', '/home/liontechnologyies/.ssh/id_rsa.pub') }}"
-  - name: Setup Sudo Access for liontechadmin User
+  - name: Setup Sudo Access for daniel User
     copy:
-      dest: /etc/sudoers.d/liontechadmin
-      content: 'liontechadmin ALL=(ALL) NOPASSWD: ALL' 
+      dest: /etc/sudoers.d/daniel
+      content: 'daniel ALL=(ALL) NOPASSWD: ALL' 
       validate: /usr/sbin/visudo -cf %s
   -  name: Disable Password Authentication
      lineinfile:
